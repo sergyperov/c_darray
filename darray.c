@@ -26,6 +26,18 @@ darray* darray_new(void) {
 }
 
 /*
+ * Удалит все элементы массива (очистит массив)
+ * Сложность операции O(n)
+ */
+void darray_clear(darray* darr) {
+    int darr_length = darray_size(darr);
+    
+    for (int i = 0; i < darr_length; i++) {
+        darray_pop_by_index(darr, 0);
+    }
+}
+
+/*
  * Размер массива
  */
 int darray_size(darray* darr) {
@@ -136,6 +148,37 @@ void darray_pop_by_index(darray* darr, int index) {
 }
 
 /*
+ * Добавляет к массиву darr все элементы массива darr_to_append (модифицируя при этом сам массив darr)
+ * Сложность операции O(n)
+ */
+void darray_append(darray* darr, darray* darr_to_append) {
+    int darr2_length = darray_size(darr_to_append);
+
+    for (int i = 0; i < darr2_length; i++) {
+        darray_push_back(darr, darray_get_elem_by_index(darr_to_append, i)->item);
+    }
+}
+
+/*
+ * Обрежет массив, оставив подмассив, который начинается с элемента begin и будет длины length
+ * Сложность операции O(n)
+ */
+void darray_cut(darray* darr, int begin, int length) {
+    int darr_length = darray_size(darr);
+    int end = begin + length;
+    if ((begin < 0) || (begin >= darr_length) || (end < 0) || (end >= darr_length) || (begin > end)) {
+        return;
+    }
+    
+    for (int i = 0; i < begin; i++) {
+        darray_pop_by_index(darr, 0);
+    }
+    for (int i = end; i < darr_length; i++) {
+        darray_pop_by_index(darr, length);
+    }
+}
+
+/*
  * Возращает элемент массива с индексом index, или элемент NULL_NODE, если элемента с таким индексом нет
  * Сложность операции O(n)
  */
@@ -150,16 +193,4 @@ darray_node* darray_get_elem_by_index(darray* darr, int index) {
     }
     
     return current_node_ptr;
-}
-
-/*
- * Добавляет к массиву darr все элементы массива darr_to_append (модифицируя при этом сам массив darr)
- * Сложность операции O(n)
- */
-void darray_append(darray* darr, darray* darr_to_append) {
-    int darr2_length = darray_size(darr_to_append);
-
-    for (int i = 0; i < darr2_length; i++) {
-        darray_push_back(darr, darray_get_elem_by_index(darr_to_append, i)->item);
-    }
 }

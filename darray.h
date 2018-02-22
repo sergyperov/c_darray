@@ -25,6 +25,7 @@ void darray_push_front(darray* darr, void *new_item);
 void darray_insert_at_index(darray* darr, void *new_item, int index);
 void darray_pop_by_index(darray* darr, int index);
 void darray_append(darray* darr, darray* darr_to_append);
+void darray_cut(darray* darr, int begin, int length);
 darray_node* darray_get_elem_by_index(darray* darr, int index);
 
 #endif /* darray_h */
