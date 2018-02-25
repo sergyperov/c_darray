@@ -20,6 +20,7 @@ typedef struct darray {
 
 darray* darray_new(void);
 int darray_size(darray* darr);
+void darray_clear(darray* darr);
 void darray_push_back(darray* darr, void *new_item);
 void darray_push_front(darray* darr, void *new_item);
 void darray_insert_at_index(darray* darr, void *new_item, int index);

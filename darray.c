@@ -184,7 +184,7 @@ void darray_cut(darray* darr, int begin, int length) {
  */
 darray_node* darray_get_elem_by_index(darray* darr, int index) {
     if ((index < 0) || (index >= darr->size)) {
-        return NULL_NODE;
+        return NULL;
     }
     
     darray_node* current_node_ptr = darr->head;
