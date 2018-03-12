@@ -16,9 +16,10 @@ typedef struct darray {
     darray_node* head;
     darray_node* last;
     int size;
+    int elem_size;
 } darray;
 
-darray* darray_new(void);
+darray* darray_new(int elem_size);
 int darray_size(darray* darr);
 void darray_clear(darray* darr);
 void darray_push_back(darray* darr, void *new_item);

@@ -1,12 +1,9 @@
 /*
  *  darray (dynamic array)
- *  Реализация полиморфного динамического массива на языке программирования C
+ *  Реализация полиморфного динамического списка на языке программирования C
  *  Элементы массива могут быть любого типа, так как используется указатель void*
  *
  *  Для удобной работы для каждого типа данных, используемого в работе, нужно написать методы-обёртки, которые будут работать непосредственно с этим типом данных напрямую.
- *  Пример (для типа mytype):
- *  для метода darray_push_back(darray* darr, void *new_item) нужен метод mytype_darray_push_back(darray* darr, mytype *new_item)
- *  и так далее
  */
 
 #include "darray.h"
@@ -16,9 +13,10 @@ darray_node* NULL_NODE;
 /*
  * Создаёт новый динамический массив и воращает указатель на него
  */
-darray* darray_new(void) {
+darray* darray_new(int elem_size) {
     darray* darr = malloc(sizeof(darray));
     darr->size = 0;
+    darr->elem_size = elem_size;
     darr->head = NULL;
     darr->last = NULL;
     
@@ -49,6 +47,9 @@ int darray_size(darray* darr) {
  * Сложность операции O(1)
  */
 void darray_push_back(darray* darr, void *new_item) {
+    void *new_item_copy = malloc(sizeof(darr->elem_size));
+    memcpy(new_item_copy, new_item, sizeof(darr->elem_size));
+    
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
     darr_n_ptr->item = new_item;
     darr_n_ptr->next = NULL;
@@ -68,8 +69,11 @@ void darray_push_back(darray* darr, void *new_item) {
  * Сложность операции O(1)
  */
 void darray_push_front(darray* darr, void *new_item) {
+    void *new_item_copy = malloc(sizeof(darr->elem_size));
+    memcpy(new_item_copy, new_item, sizeof(darr->elem_size));
+    
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
-    darr_n_ptr->item = new_item;
+    darr_n_ptr->item = new_item_copy;
     
     if (darr->size == 0) {
         darr_n_ptr->next = NULL;
@@ -91,6 +95,9 @@ void darray_insert_at_index(darray* darr, void *new_item, int index) {
     if ((index < 0) || (index >= darr->size)) {
         return;
     }
+    
+    void *new_item_copy = malloc(sizeof(darr->elem_size));
+    memcpy(new_item_copy, new_item, sizeof(darr->elem_size));
     
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
     darr_n_ptr->item = new_item;
@@ -136,6 +143,7 @@ void darray_pop_by_index(darray* darr, int index) {
         next_node_ptr = next_node_ptr->next;
     }
     
+    free(current_node_ptr->item);
     free(current_node_ptr);
     
     if (current_node_ptr == darr->head) {
