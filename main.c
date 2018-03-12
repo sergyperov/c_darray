@@ -4,9 +4,9 @@
 #include "darray_wrappers.h"
 
 int main() {
-    darray* darr = darray_new(sizeof(int));
-    char x = 'h';
-    darray_push_front(darr, &x);
-    x = 't';
-    printf("%c ", char_darray_get_elem_by_index(darr, 0));
+    darray* darr = darray_new(sizeof(char));
+    darray_push_back(darr, "First element!");
+    darray_push_back(darr, "Second element!");
+    printf("%s\n", charptr_darray_get_elem_by_index(darr, 0));
+    printf("%s\n", charptr_darray_get_elem_by_index(darr, 1));
 }

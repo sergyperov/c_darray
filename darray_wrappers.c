@@ -30,3 +30,12 @@ float float_darray_get_elem_by_index(darray* darr, int index) {
     
     return *x;
 }
+
+char* charptr_darray_get_elem_by_index(darray* darr, int index) {
+    darray_node* darr_n = darray_get_elem_by_index(darr, index);
+    
+    char *x;
+    x = darr_n->item;
+    
+    return x;
+}
