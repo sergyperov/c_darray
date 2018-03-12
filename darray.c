@@ -69,8 +69,8 @@ void darray_push_back(darray* darr, void *new_item) {
  * Сложность операции O(1)
  */
 void darray_push_front(darray* darr, void *new_item) {
-    void *new_item_copy = malloc(sizeof(darr->elem_size));
-    memcpy(new_item_copy, new_item, sizeof(darr->elem_size));
+    void *new_item_copy = malloc(darr->elem_size);
+    memcpy(new_item_copy, new_item, darr->elem_size);
     
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
     darr_n_ptr->item = new_item_copy;
@@ -96,8 +96,8 @@ void darray_insert_at_index(darray* darr, void *new_item, int index) {
         return;
     }
     
-    void *new_item_copy = malloc(sizeof(darr->elem_size));
-    memcpy(new_item_copy, new_item, sizeof(darr->elem_size));
+    void *new_item_copy = malloc(darr->elem_size);
+    memcpy(new_item_copy, new_item, darr->elem_size);
     
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
     darr_n_ptr->item = new_item;
