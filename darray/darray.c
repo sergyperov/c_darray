@@ -1,19 +1,21 @@
 /*
  *  darray (dynamic array)
- *  Реализация полиморфного динамического списка на языке программирования C
- *  Элементы массива могут быть любого типа, так как используется указатель void*
+ *  Реализация полиморфного списка на языке программирования C
+ *  Элементы списка могут быть любого типа, так как используется указатель void*
  *
  *  Для удобной работы для каждого типа данных, используемого в работе, нужно написать методы-обёртки, которые будут работать непосредственно с этим типом данных напрямую.
  */
 
 #include "darray.h"
 
-darray_node* NULL_NODE;
-
 /*
- * Создаёт новый динамический массив и воращает указатель на него
+ * Создаёт новый динамический список и возвращает указатель на него
  */
 darray* darray_new(int elem_size) {
+    if (elem_size <= 0) {
+        return NULL;
+    }
+    
     darray* darr = malloc(sizeof(darray));
     darr->size = 0;
     darr->elem_size = elem_size;
@@ -24,7 +26,7 @@ darray* darray_new(int elem_size) {
 }
 
 /*
- * Удалит все элементы массива (очистит массив)
+ * Удалит все элементы списка (очистит список)
  * Сложность операции O(n)
  */
 void darray_clear(darray* darr) {
@@ -36,14 +38,14 @@ void darray_clear(darray* darr) {
 }
 
 /*
- * Размер массива
+ * Размер списка
  */
 int darray_size(darray* darr) {
     return darr->size;
 }
 
 /*
- * Добававляет элемент в конец массива
+ * Добававляет элемент в конец списка
  * Сложность операции O(1)
  */
 void darray_push_back(darray* darr, void *new_item) {
@@ -51,7 +53,7 @@ void darray_push_back(darray* darr, void *new_item) {
     memcpy(new_item_copy, new_item, darr->elem_size);
     
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
-    darr_n_ptr->item = new_item;
+    darr_n_ptr->item = new_item_copy;
     darr_n_ptr->next = NULL;
     
     if (darr->size == 0) {
@@ -65,7 +67,7 @@ void darray_push_back(darray* darr, void *new_item) {
 }
 
 /*
- * Добавляет элемент в начала массива
+ * Добавляет элемент в начала списка
  * Сложность операции O(1)
  */
 void darray_push_front(darray* darr, void *new_item) {
@@ -87,8 +89,8 @@ void darray_push_front(darray* darr, void *new_item) {
 }
 
 /*
- * Вставляет элемент на место index, сдвигая всю остальную часть массива вправо
- * Работает в диапозоне индексов [0, darr->size-1]. Если нужно добавить элемент в конец, использовать darray_push_back (оно и быстрее будет)
+ * Вставляет элемент на место index, сдвигая всю остальную часть списка вправо
+ * Работает в диапозоне индексов [1, darr->size-1]. Если нужно добавить элемент в начало/конец, использовать darray_push_front/darray_push_back (оно и быстрее будет)
  * Сложность операции O(n)
  */
 void darray_insert_at_index(darray* darr, void *new_item, int index) {
@@ -96,11 +98,11 @@ void darray_insert_at_index(darray* darr, void *new_item, int index) {
         return;
     }
     
-    void *new_item_copy = malloc(darr->elem_size);
-    memcpy(new_item_copy, new_item, darr->elem_size);
+    void *new_item_copy = malloc(sizeof(darr->elem_size));
+    memcpy(new_item_copy, new_item, sizeof(darr->elem_size));
     
     darray_node* darr_n_ptr = malloc(sizeof(darray_node));
-    darr_n_ptr->item = new_item;
+    darr_n_ptr->item = new_item_copy;
     darr_n_ptr->next = NULL;
     
     darray_node* prev_node_ptr = darr->head;
@@ -125,7 +127,7 @@ void darray_insert_at_index(darray* darr, void *new_item, int index) {
 }
 
 /*
- * Удаляет элемент на месте index, сдвигая всю остальную часть массива влево
+ * Удаляет элемент на месте index, сдвигая всю остальную часть списка влево
  * Сложность операции O(n)
  */
 void darray_pop_by_index(darray* darr, int index) {
@@ -156,7 +158,7 @@ void darray_pop_by_index(darray* darr, int index) {
 }
 
 /*
- * Добавляет к массиву darr все элементы массива darr_to_append (модифицируя при этом сам массив darr)
+ * Добавляет к списоку darr все элементы списка darr_to_append (модифицируя при этом сам список darr)
  * Сложность операции O(n)
  */
 void darray_append(darray* darr, darray* darr_to_append) {
@@ -168,13 +170,13 @@ void darray_append(darray* darr, darray* darr_to_append) {
 }
 
 /*
- * Обрежет массив, оставив подмассив, который начинается с элемента begin и будет длины length
+ * Обрежет список, оставив подсписок, который начинается с элемента begin и будет длины length
  * Сложность операции O(n)
  */
 void darray_cut(darray* darr, int begin, int length) {
     int darr_length = darray_size(darr);
     int end = begin + length;
-    if ((begin < 0) || (begin >= darr_length) || (end < 0) || (end >= darr_length) || (begin > end)) {
+    if ((begin < 0) || (begin >= darr_length) || (end < 0) || (end > darr_length) || (begin > end)) {
         return;
     }
     
@@ -187,7 +189,7 @@ void darray_cut(darray* darr, int begin, int length) {
 }
 
 /*
- * Возращает элемент массива с индексом index, или элемент NULL_NODE, если элемента с таким индексом нет
+ * Возращает элемент списка с индексом index, или NULL, если элемента с таким индексом нет
  * Сложность операции O(n)
  */
 darray_node* darray_get_elem_by_index(darray* darr, int index) {
