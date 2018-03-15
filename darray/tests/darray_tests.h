@@ -4,12 +4,12 @@
 #include <stdio.h>
 #include "darray.h"
 
-#include "darray_tests_module_1.h"
-#include "darray_tests_module_2.h"
-#include "darray_tests_module_3.h"
-#include "darray_tests_module_4.h"
-#include "darray_tests_module_5.h"
-#include "darray_tests_module_6.h"
+#include "darray_tests_unit_1.h"
+#include "darray_tests_unit_2.h"
+#include "darray_tests_unit_3.h"
+#include "darray_tests_unit_4.h"
+#include "darray_tests_unit_5.h"
+#include "darray_tests_unit_6.h"
 
 long long current_timestamp(void);
 void test_prepare(int *test_id, int *test_ok);

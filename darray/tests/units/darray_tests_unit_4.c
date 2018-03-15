@@ -1,4 +1,4 @@
-#include "darray_tests_module_4.h"
+#include "darray_tests_unit_4.h"
 
 /*
  МОДУЛЬ 4
@@ -13,8 +13,8 @@
  Тест 5: Успешное соединение двух разных списков одинаковой длины
  Тест 6: Успешное соединение двух разных списков разной длины
  */
-void darray_module_4_tests() {
-    printf("[UNIT TESTING] MODULE 4: 6 tests upcoming...\n");
+void darray_tests_unit_4() {
+    printf("[UNIT TESTING] UNIT 4: 6 tests upcoming...\n");
     int test_ok = 1;
     int test_id = 0;
     
@@ -165,9 +165,9 @@ void darray_module_4_tests() {
     }
     
     if (test_id == 6) {
-        printf("[UNIT TESTING] Module 4 testing SUCCESSEDED.\n");
+        printf("[UNIT TESTING] Unit 4 testing SUCCESSEDED.\n");
     } else {
-        printf("[UNIT TESTING] Module 4 testing FAILED on TEST #%i.\n", test_id);
+        printf("[UNIT TESTING] Unit 4 testing FAILED on TEST #%i.\n", test_id);
     }
     
     printf("\n\n");

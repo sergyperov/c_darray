@@ -1,4 +1,4 @@
-#include "darray_tests_module_1.h"
+#include "darray_tests_unit_1.h"
 
 /*
  МОДУЛЬ 1
@@ -9,8 +9,8 @@
  Тест 1: Успешное создание списка
  Тест 2: Невозможно создать список с отрицательный размеров элементов
  */
-void darray_module_1_tests() {
-    printf("[UNIT TESTING] MODULE 1: 2 tests upcoming...\n");
+void darray_tests_unit_1() {
+    printf("[UNIT TESTING] UNIT 1: 2 tests upcoming...\n");
     int test_ok = 1;
     int test_id = 0;
     
@@ -40,9 +40,9 @@ void darray_module_1_tests() {
     }
     
     if (test_id == 2) {
-        printf("[UNIT TESTING] Module 1 testing SUCCESSEDED.\n");
+        printf("[UNIT TESTING] Unit 1 testing SUCCESSEDED.\n");
     } else {
-        printf("[UNIT TESTING] Module 1 testing FAILED on TEST #%i.\n", test_id);
+        printf("[UNIT TESTING] Unit 1 testing FAILED on TEST #%i.\n", test_id);
     }
     
     printf("\n\n");

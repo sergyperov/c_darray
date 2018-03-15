@@ -1,5 +1,5 @@
 /*
- *  darray (dynamic array)
+ *  darray
  *  Реализация полиморфного списка на языке программирования C
  *  Элементы списка могут быть любого типа, так как используется указатель void*
  *
@@ -10,6 +10,7 @@
 
 /*
  * Создаёт новый динамический список и возвращает указатель на него
+ * Выделение памяти для нового элемента
  */
 darray* darray_new(int elem_size) {
     if (elem_size <= 0) {
@@ -38,7 +39,7 @@ void darray_clear(darray* darr) {
 }
 
 /*
- * Размер списка
+ * Возращает размер списка
  */
 int darray_size(darray* darr) {
     return darr->size;
@@ -67,7 +68,7 @@ void darray_push_back(darray* darr, void *new_item) {
 }
 
 /*
- * Добавляет элемент в начала списка
+ * Добавляет элемент в начало списка
  * Сложность операции O(1)
  */
 void darray_push_front(darray* darr, void *new_item) {
@@ -90,7 +91,7 @@ void darray_push_front(darray* darr, void *new_item) {
 
 /*
  * Вставляет элемент на место index, сдвигая всю остальную часть списка вправо
- * Работает в диапозоне индексов [1, darr->size-1]. Если нужно добавить элемент в начало/конец, использовать darray_push_front/darray_push_back (оно и быстрее будет)
+ * Работает в диапозоне индексов [1, darr->size-1]. Если нужно добавить элемент в начало/конец, использовать darray_push_front()/darray_push_back() (оно и быстрее будет)
  * Сложность операции O(n)
  */
 void darray_insert_at_index(darray* darr, void *new_item, int index) {
@@ -145,11 +146,17 @@ void darray_pop_by_index(darray* darr, int index) {
         next_node_ptr = next_node_ptr->next;
     }
     
+    int is_head = (current_node_ptr == darr->head);
+    int is_last = (current_node_ptr == darr->last);
+    
     free(current_node_ptr->item);
     free(current_node_ptr);
     
-    if (current_node_ptr == darr->head) {
+    if (is_head == 1) {
         darr->head = next_node_ptr;
+    } else if (is_last == 1) {
+        prev_node_ptr->next = NULL;
+        darr->last = prev_node_ptr;
     } else {
         prev_node_ptr->next = next_node_ptr;
     }

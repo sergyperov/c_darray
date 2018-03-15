@@ -1,4 +1,4 @@
-#include "darray_tests_module_2.h"
+#include "darray_tests_unit_2.h"
 
 /*
  МОДУЛЬ 2
@@ -18,8 +18,8 @@
  Тест 10: Успешное добавление 10 элементов поочерёдно через darray_push_back(), другого через darray_push_front()
  Тест 11: Успешное добавление элемента, при этом игнорирование изменений переменной-источника
  */
-void darray_module_2_tests() {
-    printf("[UNIT TESTING] MODULE 2: 11 tests upcoming...\n");
+void darray_tests_unit_2() {
+    printf("[UNIT TESTING] UNIT 2: 11 tests upcoming...\n");
     int test_ok = 1;
     int test_id = 0;
     
@@ -249,9 +249,9 @@ void darray_module_2_tests() {
     }
     
     if (test_id == 11) {
-        printf("[UNIT TESTING] Module 2 testing SUCCESSEDED.\n");
+        printf("[UNIT TESTING] Unit 2 testing SUCCESSEDED.\n");
     } else {
-        printf("[UNIT TESTING] Module 2 testing FAILED on TEST #%i.\n", test_id);
+        printf("[UNIT TESTING] Unit 2 testing FAILED on TEST #%i.\n", test_id);
     }
     
     printf("\n\n");

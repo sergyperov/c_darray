@@ -1,4 +1,4 @@
-#include "darray_tests_module_3.h"
+#include "darray_tests_unit_3.h"
 
 /*
  МОДУЛЬ 3
@@ -12,9 +12,10 @@
  Тест 4: Удаление несуществующего элемента ничего не испортит через darray_pop_by_index()
  Тест 5: Очищение списка через darray_pop_by_index()
  Тест 6: Очищение списка через darray_clear()
+ Тест 7: Успешное удаление последнего элемента, затем обавление элемента в конец
  */
-void darray_module_3_tests() {
-    printf("[UNIT TESTING] MODULE 3: 6 tests upcoming...\n");
+void darray_tests_unit_3() {
+    printf("[UNIT TESTING] UNIT 3: 7 tests upcoming...\n");
     int test_ok = 1;
     int test_id = 0;
     
@@ -114,10 +115,37 @@ void darray_module_3_tests() {
         test_result(test_ok);
     }
     
-    if (test_id == 6) {
-        printf("[UNIT TESTING] Module 3 testing SUCCESSEDED.\n");
+    // Тест 7
+    if (test_ok == 1) {
+        test_prepare(&test_id, &test_ok);
+        
+        darray* darr = darray_new(sizeof(int));
+        int elems_arr[5] = {5, 25, 125, 625};
+        
+        for (int i = 0; i < 5; i++) {
+            darray_push_back(darr, &elems_arr[i]);
+        }
+        darray_pop_by_index(darr, darray_size(darr)-1);
+        darray_push_back(darr, &elems_arr[4]);
+        if (darray_size(darr) == 5) {
+            test_ok = 1;
+            for (int i = 0; i < 5; i++) {
+                if (int_darray_get_elem_by_index(darr, i) !=  elems_arr[i]) {
+                    test_ok = 0;
+                    break;
+                }
+            }
+        } else {
+            test_ok = 0;
+        }
+        
+        test_result(test_ok);
+    }
+    
+    if (test_id == 7) {
+        printf("[UNIT TESTING] Unit 3 testing SUCCESSEDED.\n");
     } else {
-        printf("[UNIT TESTING] Module 3 testing FAILED on TEST #%i.\n", test_id);
+        printf("[UNIT TESTING] Unit 3 testing FAILED on TEST #%i.\n", test_id);
     }
     
     printf("\n\n");

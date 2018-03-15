@@ -1,5 +1,9 @@
 /*
- *  Тестирование darray
+    Оболочка для тестирования darray
+    Всего есть 6 модулей, каждый из которых тестирует определённый функционал
+    Все модули лежат в папке units.
+ 
+    Вызвать тестирование можно методом darray_run_tests()
  */
 
 #include "darray_tests.h"
@@ -19,10 +23,10 @@ void test_result(int test_ok) {
 }
 
 void darray_run_tests() {
-    darray_module_1_tests();
-    darray_module_2_tests();
-    darray_module_3_tests();
-    darray_module_4_tests();
-    darray_module_5_tests();
-    darray_module_6_tests();
+    darray_tests_unit_1();
+    darray_tests_unit_2();
+    darray_tests_unit_3();
+    darray_tests_unit_4();
+    darray_tests_unit_5();
+    darray_tests_unit_6();
 }

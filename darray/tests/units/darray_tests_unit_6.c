@@ -1,16 +1,16 @@
-#include "darray_tests_module_6.h"
+#include "darray_tests_unit_6.h"
 
 /*
  МОДУЛЬ 6
  Цель: Тестируем добавление элементов в массив и его очищение
  Тестируемые методы: darray_push_back(), darray_clear(),
  Действия:      1) Создаём новый массив darray* darr  с помощью darray_new(...)
- 2) Добавляем в массив n-ое количесвто элементов с помощью darray_push(...), засекаем время, сравниваем, длину массива с заявленной
- 3) Очищяем массив с помощью метода darray_clear(...), засекаем время, сравниваем длину массива с 0
+                2) Добавляем в массив n-ое количесвто элементов (много) с помощью darray_push(...), засекаем время, сравниваем, длину массива с заявленной
+                3) Очищяем массив с помощью метода darray_clear(...), засекаем время, сравниваем длину массива с 0
  Условие прохождения теста: Длина массива после заполнения далжна быть равна заявленной, после очищения должна быть равна 0
  */
-void darray_module_6_tests() {
-    printf("[UNIT TESTING] MODULE 6: 8 tests upcoming...\n");
+void darray_tests_unit_6() {
+    printf("[UNIT TESTING] UNIT 6: 8 tests upcoming...\n");
     int million = 1000000;
     int i, j;
     for (i = 1, j = 1; i <= 8; i++, j*=2) {
@@ -20,9 +20,9 @@ void darray_module_6_tests() {
     }
     
     if (i >= 8) {
-        printf("[UNIT TESTING] Module 6 testing SUCCESSEDED.\n");
+        printf("[UNIT TESTING] Unit 6 testing SUCCESSEDED.\n");
     } else {
-        printf("[UNIT TESTING] Module 6 testing FAILED on TEST #%i.\n", i);
+        printf("[UNIT TESTING] Unit 6 testing FAILED on TEST #%i.\n", i);
     }
     
     printf("\n\n");

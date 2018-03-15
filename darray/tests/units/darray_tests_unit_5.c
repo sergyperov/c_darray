@@ -1,4 +1,4 @@
-#include "darray_tests_module_5.h"
+#include "darray_tests_unit_5.h"
 
 /*
  МОДУЛЬ 4
@@ -14,8 +14,8 @@
  Тест 6: Успешное пустое обрезание непустого списка
  Тест 7: Выход за границы списка
  */
-void darray_module_5_tests() {
-    printf("[UNIT TESTING] MODULE 5: 7 tests upcoming...\n");
+void darray_tests_unit_5() {
+    printf("[UNIT TESTING] UNIT 5: 7 tests upcoming...\n");
     int test_ok = 1;
     int test_id = 0;
     
@@ -186,9 +186,9 @@ void darray_module_5_tests() {
     }
     
     if (test_id == 7) {
-        printf("[UNIT TESTING] Module 5 testing SUCCESSEDED.\n");
+        printf("[UNIT TESTING] Unit 5 testing SUCCESSEDED.\n");
     } else {
-        printf("[UNIT TESTING] Module 5 testing FAILED on TEST #%i.\n", test_id);
+        printf("[UNIT TESTING] Unit 5 testing FAILED on TEST #%i.\n", test_id);
     }
     
     printf("\n\n");
